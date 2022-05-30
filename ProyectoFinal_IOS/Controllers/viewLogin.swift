@@ -24,7 +24,7 @@ class viewLogin:UIViewController
         if(def?.token != nil){
             getRenovarToken()
             let vista = storyboard?.instantiateViewController(identifier: "publicacionesEditable") as? viewPublicaciones
-            vista?.modalPresentationStyle = .fullScreen
+            //vista?.modalPresentationStyle = .fullScreen
             self.navigationController?.present(vista!, animated: true, completion: nil)
         }
     }
