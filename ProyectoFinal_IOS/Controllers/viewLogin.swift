@@ -1,0 +1,43 @@
+//
+//  ViewController.swift
+//  ProyectoFinal_IOS
+//
+//  Created by Karla Marquez on 5/26/22.
+//
+
+import Foundation
+import UIKit
+
+class viewLogin:UIViewController
+{
+    @IBOutlet weak var lblUsername: UILabel!
+    
+    @IBOutlet weak var lblPassword: UILabel!
+    @IBOutlet weak var txtUsername: UITextField!
+    @IBOutlet weak var txtPassword: UITextField!
+    @IBOutlet weak var btnLogin: UIButton!
+    @IBOutlet weak var lblSignUp: UILabel!
+
+    
+    @IBAction func btnSignUp(_ sender: Any) {
+     
+    }
+    
+    @IBAction func btnLogin(_ sender: UIButton) {
+        let usuario = txtUsername.text!
+        let contrasena = txtPassword.text!
+        postIniciarSesion(usuario: usuario, contrasena: contrasena)
+
+        //getUsuarios()
+        //print(usuarios)
+        //postIniciarSesion(usuario: usuario, contrasena: contrasena)
+
+        let vista = storyboard?.instantiateViewController(identifier: "publicacionesEditable") as? viewPublicaciones
+        self.navigationController?.present(vista!, animated: true, completion: nil)
+    }
+    
+    @IBAction func btnSign(_ sender: UIButton) {
+        let vista = storyboard?.instantiateViewController(identifier: "viewSignUpID") as? viewSignUp
+        self.navigationController?.present(vista!, animated: true, completion: nil)
+    }
+}
