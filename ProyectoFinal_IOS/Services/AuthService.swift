@@ -61,9 +61,6 @@ func postIniciarSesion(usuario: String, contrasena: String) {
                let defaults = UserDefaults.standard
                 
                 defaults.setCustomObject(auth,forKey: "auth")
-                
-                let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")
-                print("token \(def!.token)")
             }
             catch let jsonError{
                 print(jsonError)
@@ -74,29 +71,31 @@ func postIniciarSesion(usuario: String, contrasena: String) {
 
 func getRenovarToken(){
     let defaults = UserDefaults.standard
-    guard let session = defaults.object(forKey: "auth") as? Auth else {return}
+    let session = defaults.getCustomObject(dataType: Auth.self, key: "auth")
 
-    let stringURL = baseURL + "/auth/renew"
+    let stringURL = baseURL + "/usuarios/auth/renew"
     guard let url = URL(string: stringURL) else {return}
-
+    
+    
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
-    request.allHTTPHeaderFields = ["x-token": session.token]
-
+    request.allHTTPHeaderFields = ["x-token": session!.token, "Accept":"application/json"]
+    print("actual token \(session!.token)")
     URLSession.shared.dataTask(with:request){
         (data,response,error) in
         DispatchQueue.main.async {
             guard let datos = data else {return}
             do{
-                let dataJSON = try? JSONSerialization.jsonObject(with: datos, options: [])
-                if let dataJSON = dataJSON as? [String:Any]{
-                    if dataJSON["ok"] as! Bool{
-                        let auth:Auth = dataJSON["results"]! as! Auth
-                        let defaults = UserDefaults.standard
-                        defaults.set(auth,forKey: "auth")
-                    }
-                }
-
+                let decoder = JSONDecoder();
+                
+                let auth = try decoder.decode(AuthResponse.self, from: datos).results
+                print(auth)
+               let defaults = UserDefaults.standard
+                
+                defaults.setCustomObject(auth,forKey: "auth")
+                
+                let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")
+                print("nuevo token \(def!.token)")
             }
             catch let jsonError {
                 print(jsonError)
