@@ -23,4 +23,13 @@ class Post: Codable {
         self.descripcion = descripcion
     }
 }
-var posts = [Post]()
+
+struct PostStruct:Codable{
+    var idPost: Int
+    var idUsuario: Int
+    var img: String
+    var publicacion: String
+    var status: Bool
+    var descripcion: String
+}
+var posts = [PostStruct]()

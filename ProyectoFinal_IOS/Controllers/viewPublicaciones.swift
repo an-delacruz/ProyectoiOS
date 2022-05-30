@@ -15,5 +15,6 @@ class viewPublicaciones:UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getPublicaciones()
     }
 }
