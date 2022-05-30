@@ -17,8 +17,16 @@ class viewLogin:UIViewController
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var btnLogin: UIButton!
     @IBOutlet weak var lblSignUp: UILabel!
-
     
+    override func viewDidLoad() {
+        let defaults = UserDefaults.standard
+        let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")
+        if(def?.token != nil){
+            getRenovarToken()
+            let vista = storyboard?.instantiateViewController(identifier: "publicacionesEditable") as? viewPublicaciones
+            self.navigationController?.present(vista!, animated: true, completion: nil)
+        }
+    }
     @IBAction func btnSignUp(_ sender: Any) {
      
     }
@@ -27,7 +35,6 @@ class viewLogin:UIViewController
         let usuario = txtUsername.text!
         let contrasena = txtPassword.text!
         postIniciarSesion(usuario: usuario, contrasena: contrasena)
-
         //getUsuarios()
         //print(usuarios)
         //postIniciarSesion(usuario: usuario, contrasena: contrasena)

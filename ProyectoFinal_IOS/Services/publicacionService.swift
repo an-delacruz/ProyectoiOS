@@ -45,16 +45,21 @@ func postPublicacion(_ post:Post){
     let defaults = UserDefaults.standard
     let session = defaults.object(forKey: "auth") as? Auth
     let stringURL = baseURL + "/posts/"
-    let enconder = JSONEncoder()
-    enconder.outputFormatting = .prettyPrinted
-    let jsonData = try! enconder.encode(post)
+    
+    //let enconder = JSONEncoder()
+    //enconder.outputFormatting = .prettyPrinted
+    //let jsonData = try! enconder.encode(post)
+    let jsonData = try! JSONSerialization.data(withJSONObject: post, options: .prettyPrinted)
     guard let url = URL(string: stringURL) else {return}
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.httpBody = jsonData
     //request.addValue(token, forHTTPHeaderField: "x-token")
     request.allHTTPHeaderFields = ["x-token": session!.token]
-
+    request.allHTTPHeaderFields = [
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    ]
     URLSession.shared.dataTask(with:request){
         (data,response,error) in
         DispatchQueue.main.async {
@@ -62,7 +67,7 @@ func postPublicacion(_ post:Post){
             let dataJSON = try? JSONSerialization.jsonObject(with: datos, options:[])
             if let dataJSON = dataJSON as? [String:Any]{
                 if dataJSON["ok"] as! Bool{
-                    
+                    print(dataJSON);
                 }
             }
 
