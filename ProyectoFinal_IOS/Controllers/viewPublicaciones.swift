@@ -16,8 +16,8 @@ class viewPublicaciones:UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         getPublicaciones()
-
     }
+
     func reloadData(){
         print("Se recargan los datos")
         print("Posts Recargados -> \(posts)")
@@ -34,20 +34,25 @@ class viewPublicaciones:UITableViewController{
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("Posts Recargados -> \(posts)")
-        let celda = tableView.dequeueReusableCell(withIdentifier: "celdaPublicacion", for: indexPath) as! viewCeldaPublicacion
+        let celda = Bundle.main.loadNibNamed("publicacionesXib", owner: self)?.first as! viewCeldaPublicacion
+        //let celda = tableView.dequeueReusableCell(withIdentifier: "celdaPublicacion", for: indexPath) as! viewCeldaPublicacion
         celda.lblUsuario?.text = posts[indexPath.row].usuario
         celda.lblDescripcion?.text = posts[indexPath.row].descripcion
+        celda.Imagen?.cargarImagen(posts[indexPath.row].img)
+        celda.lblFecha?.text = posts[indexPath.row].publicacion
+        //let dateFormatterGet = DateFormatter()
+        //dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm.sssZ"
         
+        //let dateFormatterPrint = DateFormatter()
+        //dateFormatterPrint.dateFormat = "MMM dd,yyyy"
         
-        let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        
-        let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "MMM dd,yyyy"
-        
-        let date: Date? = dateFormatterGet.date(from: posts[indexPath.row].publicacion)
-        celda.lblFecha?.text = dateFormatterPrint.string(from: date!)
+        //let date: Date? = dateFormatterGet.date(from: posts[indexPath.row].publicacion)
+        //celda.lblFecha?.text = dateFormatterPrint.string(from: date!)
         
         return celda
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 301
     }
 }
