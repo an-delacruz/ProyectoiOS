@@ -49,7 +49,7 @@ func getPublicaciones(completion: @escaping (_ json: Any?, _ error: Error?)->())
 }.resume()
 }
 
-func postPublicacion(_ post:Post){
+func postPublicacion(_ post:Post, completion: @escaping(_ json:Any?,_ error:Error?)->()){
     let defaults = UserDefaults.standard
     let session = defaults.object(forKey: "auth") as? Auth
     let stringURL = baseURL + "/posts/"
@@ -78,11 +78,11 @@ func postPublicacion(_ post:Post){
                     print(dataJSON);
                 }
             }
-
+            completion(dataJSON, error)
         }
     }.resume()
 }
-func deletePublicacion(_ id: Int) {
+func deletePublicacion(_ id: Int, completion: @escaping(_ json:Any?, _ error:Error?)->()) {
     let defaults = UserDefaults.standard
     let session = defaults.object(forKey: "auth") as? Auth
     let stringURL = baseURL + "/posts/\(id)"
@@ -102,6 +102,7 @@ func deletePublicacion(_ id: Int) {
                     print("msg -> \(dataJSON["msg"]!)")
                 }
             }
+            completion(dataJSON, error)
         }
     }.resume()
 }

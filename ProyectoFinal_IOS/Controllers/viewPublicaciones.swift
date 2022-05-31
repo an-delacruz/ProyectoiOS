@@ -13,6 +13,11 @@ class viewPublicaciones:UITableViewController{
     
     @IBOutlet weak var toolConfiguraciones: UIBarButtonItem!
     
+    @IBAction func btnAgregarPost(_ sender: UIBarButtonItem) {
+        print("Agregar post")
+        //let vista = storyboard?.instantiateViewController(identifier: "viewAddPost") as? viewAgregarPost
+        //self.navigationController?.present(vista!, animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         getPublicaciones(){
