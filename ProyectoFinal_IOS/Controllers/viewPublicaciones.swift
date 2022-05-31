@@ -15,16 +15,11 @@ class viewPublicaciones:UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getPublicaciones()
-    }
-
-    func reloadData(){
-        print("Se recargan los datos")
-        print("Posts Recargados -> \(posts)")
-
-        self.tableView.reloadData()
-        self.tableView.refreshControl?
-            .endRefreshing()
+        getPublicaciones(){
+            json, error in
+            self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
+        }
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

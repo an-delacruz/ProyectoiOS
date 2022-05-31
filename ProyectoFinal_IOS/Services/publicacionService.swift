@@ -18,7 +18,7 @@ struct PublicacionResponse:Codable {
         case results = "results"
     }
 }
-func getPublicaciones()
+func getPublicaciones(completion: @escaping (_ json: Any?, _ error: Error?)->())
 {
     let defaults = UserDefaults.standard
     let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")
@@ -40,11 +40,7 @@ func getPublicaciones()
                 let decoder = JSONDecoder()
                 posts = try decoder.decode(PublicacionResponse.self,from:datos).results
                 print("post -> \(posts)")
-                posts.forEach{ post in
-                    print("Post -> \(post)")
-                    let tableView = viewPublicaciones();
-                    tableView.reloadData()
-                }
+                completion(posts, error)
             }
             catch{
                 print("Error\(error)")
