@@ -36,6 +36,10 @@ var idUsuario: Int
     }
 }
 
+struct PostUsuarioStruct: Codable {
+    var nombre, apellido, usuario, contrasena: String
+}
+
 
 var usuarios = [Usuario]()
 

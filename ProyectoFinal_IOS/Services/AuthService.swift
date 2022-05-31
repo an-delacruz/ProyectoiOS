@@ -38,6 +38,15 @@ struct ErrorResponse:Codable {
         case msg = "msg"
     }
 }
+struct BasicResponse:Codable {
+    var ok:Bool
+    var msg: String
+    
+    enum CodingKeys: String, CodingKey{
+        case ok = "ok"
+        case msg = "msg"
+    }
+}
 func postIniciarSesion(usuario: String, contrasena: String, completion: @escaping(_ json: Any?, _ error: ErrorResponse?)-> ()) {
     let dict = ["usuario": usuario, "contrasena": contrasena]
     

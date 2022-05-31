@@ -59,9 +59,7 @@ func getUsuario(usuario:String){
         }
     }.resume()
 }
-func postUsuario(_ usuario:Usuario){
-    let defaults = UserDefaults.standard
-    let session = defaults.object(forKey: "auth") as? Auth
+func postUsuario(_ usuario:PostUsuarioStruct,completion: @escaping(_ json: Any?, _ error: ErrorResponse?)-> ()){
     let stringURL = baseURL + "/usuarios/"
     let enconder = JSONEncoder()
     enconder.outputFormatting = .prettyPrinted
@@ -69,21 +67,37 @@ func postUsuario(_ usuario:Usuario){
     guard let url = URL(string: stringURL) else {return}
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
+    request.allHTTPHeaderFields = [
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    ]
     request.httpBody = jsonData
-    //request.addValue(token, forHTTPHeaderField: "x-token")
-    request.allHTTPHeaderFields = ["x-token": session!.token]
 
     URLSession.shared.dataTask(with:request){
         (data,response,error) in
         DispatchQueue.main.async {
-            guard let datos = data else {return}
-            let dataJSON = try? JSONSerialization.jsonObject(with: datos, options:[])
-            if let dataJSON = dataJSON as? [String:Any]{
-                if dataJSON["ok"] as! Bool{
+            do{
+                
+                let decoder = JSONDecoder();
+                guard let res = response as? HTTPURLResponse else {return}
+                print("res -› \(res)")
+                guard let datos = data else {return}
+                if  res.statusCode == 200 {
+                    let body = try decoder.decode(BasicResponse.self, from: datos)
+                    completion(body,nil)
+                    return
                     
+                } else  {
+                    let err = try decoder.decode(ErrorResponse.self, from: datos)
+                    print(err)
+                    completion(nil,err)
+                    return
                 }
+                
             }
-
+            catch let jsonError{
+                print(jsonError)
+            }
         }
     }.resume()
 
