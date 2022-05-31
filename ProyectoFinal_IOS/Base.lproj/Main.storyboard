@@ -177,7 +177,7 @@
             </objects>
             <point key="canvasLocation" x="-610817" y="-57708"/>
         </scene>
-        <!--View Publicaciones-->
+        <!--Item-->
         <scene sceneID="jxg-Rh-c8P">
             <objects>
                 <tableViewController storyboardIdentifier="publicacionesEditable" id="9m2-91-egP" customClass="viewPublicaciones" customModule="ProyectoFinal_IOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -185,9 +185,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <toolbar key="tableHeaderView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="5KM-Tp-lgq">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <items>
+                                <barButtonItem title="Item" image="plus" catalog="system" landscapeImage="plus" id="9yJ-sD-y53"/>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="m9c-hN-vmr"/>
+                                <barButtonItem title="Item" image="newspaper.fill" catalog="system" id="VQz-cU-rRe"/>
+                            </items>
+                        </toolbar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="RFD-n8-qNK">
-                                <rect key="frame" x="0.0" y="49.5" width="414" height="301"/>
+                                <rect key="frame" x="0.0" y="93.5" width="414" height="301"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RFD-n8-qNK" id="9Gy-cp-YpV">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="301"/>
@@ -201,11 +210,8 @@
                             <outlet property="delegate" destination="9m2-91-egP" id="Bma-ET-RIf"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem title="Item" image="plus" catalog="system" landscapeImage="plus" id="9yJ-sD-y53"/>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="m9c-hN-vmr"/>
-                        <barButtonItem title="Item" image="newspaper.fill" catalog="system" id="VQz-cU-rRe"/>
-                    </toolbarItems>
+                    <tabBarItem key="tabBarItem" title="Item" id="gDk-8Y-z7P"/>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="k50-77-bXN"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -216,7 +222,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bwM-ze-m46" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationItem id="7Ms-Fp-dhb"/>
             </objects>
-            <point key="canvasLocation" x="-610072.46376811597" y="-57708.482142857138"/>
+            <point key="canvasLocation" x="-609162.31884057971" y="-57708.482142857138"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="TX4-Hy-ayV">
@@ -269,6 +275,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m7H-Rd-IM7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-287194.20289855072" y="-69504.241071428565"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="s5P-vT-PGG">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="xeQ-lW-buE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9wS-Jx-azq">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="9m2-91-egP" kind="relationship" relationship="viewControllers" id="O9H-cw-YLt"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HvN-oG-6l4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-610072.46376811597" y="-57708.482142857138"/>
         </scene>
     </scenes>
     <resources>
