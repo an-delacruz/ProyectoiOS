@@ -29,10 +29,18 @@ struct IniciarSesion:Codable {
         self.contrasena = contrasena
     }
 }
-
-func postIniciarSesion(usuario: String, contrasena: String, completion: @escaping(_ json: Any?, _ error: Error?)-> ()) {
+struct ErrorResponse:Codable {
+    var ok:Bool
+    var msg: String
+    
+    enum CodingKeys: String, CodingKey{
+        case ok = "ok"
+        case msg = "msg"
+    }
+}
+func postIniciarSesion(usuario: String, contrasena: String, completion: @escaping(_ json: Any?, _ error: ErrorResponse?)-> ()) {
     let dict = ["usuario": usuario, "contrasena": contrasena]
-
+    
     let jsonData = try! JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
     
     let stringURL = baseURL + "/usuarios/auth/"
@@ -50,29 +58,36 @@ func postIniciarSesion(usuario: String, contrasena: String, completion: @escapin
     {
         (data,response,error) in
         DispatchQueue.main.async {
-            guard let datos = data else {
-                return
-            }
-            do {
+            do{
                 let decoder = JSONDecoder();
+                guard let res = response as? HTTPURLResponse else {return}
                 
-                let auth = try decoder.decode(AuthResponse.self, from: datos).results
-                print(auth)
-               let defaults = UserDefaults.standard
+                guard let datos = data else {return}
+                if  res.statusCode == 200 {
+                    let auth = try decoder.decode(AuthResponse.self, from: datos).results
+                    print(auth)
+                    let defaults = UserDefaults.standard
+                    
+                    defaults.setCustomObject(auth,forKey: "auth")
+                    completion(auth,nil)
+                    return
+                    
+                } else  {
+                    let err = try decoder.decode(ErrorResponse.self, from: datos)
+                    print(err)
+                    completion(nil,err)
+                    return
+                }
                 
-                defaults.setCustomObject(auth,forKey: "auth")
-                completion(auth, error)
-                let loginController = viewLogin()
-                loginController.redirigirLogin()
             }
             catch let jsonError{
-                print("json \(jsonError)")
+                print(jsonError)
             }
         }
     }.resume()
 }
 
-func getRenovarToken(){
+func getRenovarToken( completion: @escaping(_ json: Any?, _ error: ErrorResponse?)-> ()){
     let defaults = UserDefaults.standard
     let session = defaults.getCustomObject(dataType: Auth.self, key: "auth")
 
@@ -87,20 +102,29 @@ func getRenovarToken(){
     URLSession.shared.dataTask(with:request){
         (data,response,error) in
         DispatchQueue.main.async {
-            guard let datos = data else {return}
             do{
                 let decoder = JSONDecoder();
+                guard let res = response as? HTTPURLResponse else {return}
                 
-                let auth = try decoder.decode(AuthResponse.self, from: datos).results
-                print(auth)
-               let defaults = UserDefaults.standard
+                guard let datos = data else {return}
+                if  res.statusCode == 200 {
+                    let auth = try decoder.decode(AuthResponse.self, from: datos).results
+                    print(auth)
+                    let defaults = UserDefaults.standard
+                    
+                    defaults.setCustomObject(auth,forKey: "auth")
+                    completion(auth,nil)
+                    return
+                    
+                } else  {
+                    let err = try decoder.decode(ErrorResponse.self, from: datos)
+                    print(err)
+                    completion(nil,err)
+                    return
+                }
                 
-                defaults.setCustomObject(auth,forKey: "auth")
-                
-                let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")
-                print("nuevo token \(def!.token)")
             }
-            catch let jsonError {
+            catch let jsonError{
                 print(jsonError)
             }
         }
