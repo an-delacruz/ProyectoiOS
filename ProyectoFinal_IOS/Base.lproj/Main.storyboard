@@ -63,7 +63,6 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Log in"/>
                                 <connections>
                                     <action selector="btnLogin:" destination="8lc-Ji-2Wf" eventType="touchUpInside" id="xMd-lJ-2z6"/>
-                                    <segue destination="9m2-91-egP" kind="show" id="HrK-Xl-l6b"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qR-gq-bF2">

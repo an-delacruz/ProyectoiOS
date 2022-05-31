@@ -24,7 +24,7 @@ class viewLogin:UIViewController
         if(def?.token != nil){
             getRenovarToken()
             let vista = storyboard?.instantiateViewController(identifier: "publicacionesEditable") as? viewPublicaciones
-            //vista?.modalPresentationStyle = .fullScreen
+            vista?.modalPresentationStyle = .fullScreen
             self.navigationController?.present(vista!, animated: true, completion: nil)
         }
     }
@@ -35,15 +35,27 @@ class viewLogin:UIViewController
     @IBAction func btnLogin(_ sender: UIButton) {
         let usuario = txtUsername.text!
         let contrasena = txtPassword.text!
-        postIniciarSesion(usuario: usuario, contrasena: contrasena)
+        let group = DispatchGroup()
+        group.enter()
+        postIniciarSesion(usuario: usuario, contrasena: contrasena){
+            json, error in
+            let vista = self.storyboard?.instantiateViewController(identifier: "publicacionesEditable") as? viewPublicaciones
+            vista?.modalPresentationStyle = .fullScreen
+
+            self.navigationController?.present(vista!, animated: true, completion: nil)
+        }
+        
         //getUsuarios()
         //print(usuarios)
-        //postIniciarSesion(usuario: usuario, contrasena: contrasena)
+        //postIniciarSesion(usuario: usuario, contrasena: contrasena
 
-        let vista = storyboard?.instantiateViewController(identifier: "publicacionesEditable") as? viewPublicaciones
-        self.navigationController?.present(vista!, animated: true, completion: nil)
+
     }
-    
+    func redirigirLogin(){
+
+        print("Redirigir login")
+
+    }
     @IBAction func btnSign(_ sender: UIButton) {
         let vista = storyboard?.instantiateViewController(identifier: "viewSignUpID") as? viewSignUp
         self.navigationController?.present(vista!, animated: true, completion: nil)

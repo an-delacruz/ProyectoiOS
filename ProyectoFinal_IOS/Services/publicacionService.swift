@@ -42,7 +42,8 @@ func getPublicaciones()
                 print("post -> \(posts)")
                 posts.forEach{ post in
                     print("Post -> \(post)")
-                    let tableView = viewPublicaciones();                    tableView.reloadData()
+                    let tableView = viewPublicaciones();
+                    tableView.reloadData()
                 }
             }
             catch{

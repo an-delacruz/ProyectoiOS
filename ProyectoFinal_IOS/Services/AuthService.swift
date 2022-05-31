@@ -30,7 +30,7 @@ struct IniciarSesion:Codable {
     }
 }
 
-func postIniciarSesion(usuario: String, contrasena: String) {
+func postIniciarSesion(usuario: String, contrasena: String, completion: @escaping(_ json: Any?, _ error: Error?)-> ()) {
     let dict = ["usuario": usuario, "contrasena": contrasena]
 
     let jsonData = try! JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
@@ -61,9 +61,12 @@ func postIniciarSesion(usuario: String, contrasena: String) {
                let defaults = UserDefaults.standard
                 
                 defaults.setCustomObject(auth,forKey: "auth")
+                completion(auth, error)
+                let loginController = viewLogin()
+                loginController.redirigirLogin()
             }
             catch let jsonError{
-                print(jsonError)
+                print("json \(jsonError)")
             }
         }
     }.resume()
