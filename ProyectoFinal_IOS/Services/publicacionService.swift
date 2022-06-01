@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 var baseURL = "https://ios-backend-tec.herokuapp.com"
 
@@ -22,7 +23,7 @@ struct PublicacionPost: Codable{
     var descripcion:String
     var img: String
 }
-func getPublicaciones(completion: @escaping (_ json: Any?, _ error: Error?)->())
+func getPublicaciones(completion: @escaping (_ json: Any?, _ error: Any?)->())
 {
     let defaults = UserDefaults.standard
     let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")
@@ -53,15 +54,15 @@ func getPublicaciones(completion: @escaping (_ json: Any?, _ error: Error?)->())
 }.resume()
 }
 
-func postPublicacion(_ post:PublicacionPost, completion: @escaping(_ json:Any?,_ error:Any?)->()){
+func postPublicacion(_ post:PublicacionPost, completion: @escaping(_ json:Any?,_ error:ErrorResponse?)->()){
     let defaults = UserDefaults.standard
-    let session = defaults.object(forKey: "auth") as? Auth
+    let session = defaults.getCustomObject(dataType: Auth.self, key: "auth")
     let stringURL = baseURL + "/posts/"
     
     //let enconder = JSONEncoder()
     //enconder.outputFormatting = .prettyPrinted
     //let jsonData = try! enconder.encode(post)
-    let jsonData = try! JSONSerialization.data(withJSONObject: post, options: .prettyPrinted)
+    let jsonData = try! JSONEncoder().encode(post)
     guard let url = URL(string: stringURL) else {return}
     var request = URLRequest(url: url)
     request.httpMethod = "POST"

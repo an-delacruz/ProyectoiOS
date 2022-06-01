@@ -27,12 +27,12 @@ class viewCrearPublicacion: UIViewController, UIImagePickerControllerDelegate, U
         let descripcion = txtDescripcion.text!
         if(validarInformacion(imgBase64!, descripcion)){
             let publicacion = PublicacionPost(descripcion: descripcion, img: imgBase64!)
-           // postPublicacion(publicacion){
-             //   json, error in
-               // if error != nil{
-                    //self.Alerta("Error al crear el post", error!.msg){}
-                //}
-            //}
+           postPublicacion(publicacion){
+            json, error in
+                if error != nil{
+                    self.Alerta("Error al crear el post", error!.msg){}
+                }
+            }
             print("Base64 \(imgBase64)")
         }else{
             self.Alerta("Faltan campos", "Selecciona una imagen e ingresa la descripcion"){}
