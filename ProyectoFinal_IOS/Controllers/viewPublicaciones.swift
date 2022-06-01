@@ -27,6 +27,7 @@ class viewPublicaciones:UITableViewController{
             self.tableView.reloadData()
             self.tableView.refreshControl?.endRefreshing()
         }
+        
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -56,5 +57,11 @@ class viewPublicaciones:UITableViewController{
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 301
+    }
+    @IBAction func refreshData(_ sender: Any) {
+        getPublicaciones(){
+            json, error in
+            self.refreshControl?.endRefreshing()
+        }
     }
 }
