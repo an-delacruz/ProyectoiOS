@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v8T-X2-0oK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v8T-X2-0oK">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -201,7 +201,12 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <items>
-                                <barButtonItem title="Item" image="plus" catalog="system" landscapeImage="plus" id="9yJ-sD-y53"/>
+                                <barButtonItem title="Item" image="plus" catalog="system" landscapeImage="plus" id="9yJ-sD-y53">
+                                    <connections>
+                                        <action selector="btnAgregarPost:" destination="9m2-91-egP" id="VqP-G5-vGV"/>
+                                        <segue destination="cn6-hP-fgX" kind="presentation" id="pNf-Qb-zSX"/>
+                                    </connections>
+                                </barButtonItem>
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="m9c-hN-vmr"/>
                                 <barButtonItem title="Item" image="newspaper.fill" catalog="system" id="VQz-cU-rRe"/>
                             </items>
@@ -236,39 +241,56 @@
             </objects>
             <point key="canvasLocation" x="-610061" y="-57708"/>
         </scene>
-        <!--View Controller-->
+        <!--View Crear Publicacion-->
         <scene sceneID="TX4-Hy-ayV">
             <objects>
-                <viewController storyboardIdentifier="viewAddPost" id="cn6-hP-fgX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="viewCrearPublicacion" id="cn6-hP-fgX" customClass="viewCrearPublicacion" customModule="ProyectoFinal_IOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ta7-r5-Ncf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4T-Ws-4tV">
-                                <rect key="frame" x="44" y="360" width="350" height="102"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p2b-q3-5El">
                                 <rect key="frame" x="63" y="121" width="288" height="231"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Vo-I1-HqL">
-                                <rect key="frame" x="135" y="470" width="145" height="60"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4IB-e1-562">
+                                <rect key="frame" x="40" y="360" width="337" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Hr-OM-gpG">
+                                <rect key="frame" x="246" y="457" width="117" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <buttonConfiguration key="configuration" style="filled" image="plus.circle" catalog="system" title="Create"/>
+                                <connections>
+                                    <action selector="btnAgregarPost:" destination="cn6-hP-fgX" eventType="touchUpInside" id="qmv-l5-e0p"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36M-dP-kHN">
+                                <rect key="frame" x="291" y="82" width="59" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="CREATE"/>
+                                <buttonConfiguration key="configuration" style="gray" image="photo" catalog="system" title="+"/>
+                                <connections>
+                                    <action selector="btnAgregarImagen:" destination="cn6-hP-fgX" eventType="touchUpInside" id="Mli-Mk-4gO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rEJ-dd-g1X"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ReP-x2-oWr"/>
+                    <connections>
+                        <outlet property="imgPublicacion" destination="p2b-q3-5El" id="mcY-v7-zTH"/>
+                        <outlet property="txtDescripcion" destination="4IB-e1-562" id="KUH-3i-URI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m0o-3B-ASr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-609303" y="-57708"/>
+            <point key="canvasLocation" x="-609304.34782608703" y="-57708.482142857138"/>
         </scene>
         <!--View Configuration-->
         <scene sceneID="JrM-Mc-hco">
@@ -438,9 +460,17 @@
         <image name="logo instatec" width="1000" height="1000"/>
         <image name="newspaper.fill" catalog="system" width="128" height="111"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
         <image name="photo.artframe" catalog="system" width="128" height="93"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="108"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
