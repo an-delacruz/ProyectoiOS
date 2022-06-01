@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v8T-X2-0oK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v8T-X2-0oK">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -208,7 +208,11 @@
                                     </connections>
                                 </barButtonItem>
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="m9c-hN-vmr"/>
-                                <barButtonItem title="Item" image="newspaper.fill" catalog="system" id="VQz-cU-rRe"/>
+                                <barButtonItem title="Item" image="person.fill" catalog="system" id="VQz-cU-rRe">
+                                    <connections>
+                                        <segue destination="TK1-ep-1MW" kind="show" id="rjm-e7-JB7"/>
+                                    </connections>
+                                </barButtonItem>
                             </items>
                         </toolbar>
                         <prototypes>
@@ -367,21 +371,22 @@
                         <viewLayoutGuide key="safeArea" id="fqz-es-7Du"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="aAO-HS-Okz"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xW6-Lk-c0v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-608445" y="-57708"/>
+            <point key="canvasLocation" x="-609304" y="-57016"/>
         </scene>
-        <!--Table View Controller-->
+        <!--View Perfil Usuario-->
         <scene sceneID="AIU-yM-GWN">
             <objects>
-                <tableViewController id="TK1-ep-1MW" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="viewPerfilUsuario" id="TK1-ep-1MW" customClass="viewPerfilUsuario" customModule="ProyectoFinal_IOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="0nZ-8q-pzY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="284" id="7je-Rw-Kce">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="viewCeldaPerfil" rowHeight="284" id="7je-Rw-Kce" customClass="viewCeldaPerfil" customModule="ProyectoFinal_IOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="284"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7je-Rw-Kce" id="i8E-R3-jQA">
@@ -423,8 +428,25 @@
                                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="bu6-Yi-efV"/>
                                             </items>
                                         </toolbar>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iAB-zR-8qB">
+                                            <rect key="frame" x="359" y="12" width="45" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="pencil.circle.fill" catalog="system"/>
+                                            <connections>
+                                                <segue destination="ed3-Yy-x59" kind="show" id="XM6-Er-m48"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="btnConfiguracion" destination="iAB-zR-8qB" id="GO3-30-1aG"/>
+                                    <outlet property="btnEdit" destination="BBu-gI-3jK" id="gN0-Pl-imJ"/>
+                                    <outlet property="btnImagenes" destination="0ip-v5-WLf" id="6Yr-Rd-uOn"/>
+                                    <outlet property="imgPerfil" destination="p2b-gc-wm3" id="0Yd-9h-AAA"/>
+                                    <outlet property="lblDescription" destination="cq1-TQ-nIc" id="iiP-Ul-UF7"/>
+                                    <outlet property="lblNombre" destination="Zib-1M-wGk" id="zta-Cl-eIq"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -432,10 +454,11 @@
                             <outlet property="delegate" destination="TK1-ep-1MW" id="uJO-CG-Gfo"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Iy0-3S-JvV"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8q-Yt-P5i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-607726.08695652173" y="-57713.169642857138"/>
+            <point key="canvasLocation" x="-610062" y="-57016"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jbn-zd-VGi">
@@ -458,8 +481,9 @@
     </scenes>
     <resources>
         <image name="logo instatec" width="1000" height="1000"/>
-        <image name="newspaper.fill" catalog="system" width="128" height="111"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
+        <image name="pencil.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="photo.artframe" catalog="system" width="128" height="93"/>
         <image name="plus" catalog="system" width="128" height="113"/>
