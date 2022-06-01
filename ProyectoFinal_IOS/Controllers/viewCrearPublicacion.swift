@@ -23,33 +23,34 @@ class viewCrearPublicacion: UIViewController, UIImagePickerControllerDelegate, U
         present(imgPicker,animated: true, completion: nil)
     }
     @IBAction func btnAgregarPost(_ sender: UIButton) {
-        let imgBase64 = imgPublicacion.image?.crearCadena()
-        let descripcion = txtDescripcion.text!
-        if(validarInformacion(imgBase64!, descripcion)){
-            let publicacion = PublicacionPost(descripcion: descripcion, img: imgBase64!)
+        let imgBase64 = imgPublicacion.image?.crearCadena() ?? nil
+        let descripcion = txtDescripcion.text ?? ""
+        print()
+        if(validarInformacion(imgBase64, descripcion)){
+           let publicacion = PublicacionPost(descripcion: descripcion, img: imgBase64!)
            postPublicacion(publicacion){
             json, error in
-                if error != nil{
+               if error != nil{
                     self.Alerta("Error al crear el post", error!.msg){}
-                }
+               }else{
+                   self.dismiss(animated: true)
+               }
             }
-            print("Base64 \(imgBase64)")
         }else{
             self.Alerta("Faltan campos", "Selecciona una imagen e ingresa la descripcion"){}
         }
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        print("Imagen \(info[.originalImage] as? UIImage)")
         if let image = info[.originalImage] as? UIImage{
             imgPublicacion.contentMode = .scaleAspectFit
             imgPublicacion.image = image
         }
         self.dismiss(animated: true, completion: nil)
     }
-    func validarInformacion(_ imgBase64:String, _ descripcion:String) -> Bool
+    func validarInformacion(_ imgBase64:Any?, _ descripcion:String) -> Bool
     {
-        if imgBase64 != nil && descripcion != nil{
+        if imgBase64 != nil && descripcion != ""{
             return true
         }
         return false
