@@ -16,6 +16,5 @@ class viewCeldaPerfil:UITableViewCell{
     @IBOutlet weak var btnEdit: UIButton!
     @IBOutlet weak var btnConfiguracion: UIButton!
     @IBOutlet weak var btnImagenes: UIBarButtonItem!
-    
 }
 

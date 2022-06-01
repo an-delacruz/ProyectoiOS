@@ -45,6 +45,7 @@ func getPublicaciones(completion: @escaping (_ json: Any?, _ error: Any?)->())
                 let decoder = JSONDecoder()
                 posts = try decoder.decode(PublicacionResponse.self,from:datos).results
                 print("post -> \(posts)")
+                posts.reverse()
                 completion(posts, error)
             }
             catch{
