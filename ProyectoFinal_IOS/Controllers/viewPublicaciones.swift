@@ -61,7 +61,21 @@ class viewPublicaciones:UITableViewController{
     @IBAction func refreshData(_ sender: Any) {
         getPublicaciones(){
             json, error in
+            self.tableView.reloadData();
             self.refreshControl?.endRefreshing()
         }
     }
+    
+    
+    
+    @IBAction func btnMostrarPerfil(_ sender: Any) {
+        let vista = storyboard?.instantiateViewController(identifier: "viewPerfilUsuario") as? viewPerfilUsuario
+        vista?.modalPresentationStyle = .fullScreen
+
+        self.navigationController?.present(vista!, animated: true, completion: nil)
+    }
+    
+    
+    
+    
 }

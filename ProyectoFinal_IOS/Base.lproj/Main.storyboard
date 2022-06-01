@@ -189,7 +189,7 @@
             </objects>
             <point key="canvasLocation" x="-610817" y="-57708"/>
         </scene>
-        <!--Item-->
+        <!--View Publicaciones-->
         <scene sceneID="jxg-Rh-c8P">
             <objects>
                 <tableViewController storyboardIdentifier="publicacionesEditable" id="9m2-91-egP" customClass="viewPublicaciones" customModule="ProyectoFinal_IOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -210,7 +210,8 @@
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="m9c-hN-vmr"/>
                                 <barButtonItem title="Item" image="person.fill" catalog="system" id="VQz-cU-rRe">
                                     <connections>
-                                        <segue destination="TK1-ep-1MW" kind="show" id="rjm-e7-JB7"/>
+                                        <action selector="btnMostrarPerfil:" destination="9m2-91-egP" id="JFB-K5-Dxf"/>
+                                        <segue destination="TK1-ep-1MW" kind="showDetail" id="m7J-3d-iIV"/>
                                     </connections>
                                 </barButtonItem>
                             </items>
@@ -231,11 +232,12 @@
                             <outlet property="delegate" destination="9m2-91-egP" id="Bma-ET-RIf"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="gDk-8Y-z7P"/>
+                    <tabBarItem key="tabBarItem" title="" image="person" catalog="system" id="h0O-MF-qNN"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="k50-77-bXN"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="291-AR-YL9">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="refreshData:" destination="9m2-91-egP" eventType="valueChanged" id="vVL-yz-1hQ"/>
@@ -249,7 +251,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bwM-ze-m46" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationItem id="7Ms-Fp-dhb"/>
             </objects>
-            <point key="canvasLocation" x="-610061" y="-57708"/>
+            <point key="canvasLocation" x="-609742" y="-57388"/>
         </scene>
         <!--View Crear Publicacion-->
         <scene sceneID="TX4-Hy-ayV">
@@ -300,14 +302,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m0o-3B-ASr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-609304.34782608703" y="-57708.482142857138"/>
+            <point key="canvasLocation" x="-608452" y="-57388"/>
         </scene>
         <!--View Configuration-->
         <scene sceneID="JrM-Mc-hco">
             <objects>
                 <viewController storyboardIdentifier="configurationView" id="ed3-Yy-x59" customClass="viewConfiguration" customModule="ProyectoFinal_IOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YjA-No-N8o">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfU-G9-GF1">
@@ -364,7 +366,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
                             <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tXC-Uc-kHN">
-                                <rect key="frame" x="-4" y="813" width="414" height="49"/>
+                                <rect key="frame" x="-4" y="759" width="414" height="49"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
@@ -381,14 +383,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xW6-Lk-c0v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-609304" y="-57016"/>
+            <point key="canvasLocation" x="-608733" y="-56709"/>
         </scene>
         <!--View Perfil Usuario-->
         <scene sceneID="AIU-yM-GWN">
             <objects>
                 <tableViewController storyboardIdentifier="viewPerfilUsuario" id="TK1-ep-1MW" customClass="viewPerfilUsuario" customModule="ProyectoFinal_IOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="0nZ-8q-pzY">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -464,7 +466,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8q-Yt-P5i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-610062" y="-57016"/>
+            <point key="canvasLocation" x="-609742" y="-56709"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jbn-zd-VGi">
@@ -489,6 +491,7 @@
         <image name="logo instatec" width="1000" height="1000"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="pencil.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="photo.artframe" catalog="system" width="128" height="93"/>
