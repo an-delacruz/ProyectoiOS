@@ -42,15 +42,18 @@ class viewPublicaciones:UITableViewController{
         celda.lblUsuario?.text = posts[indexPath.row].usuario
         celda.lblDescripcion?.text = posts[indexPath.row].descripcion
         celda.Imagen?.cargarImagen(posts[indexPath.row].img)
-        celda.lblFecha?.text = posts[indexPath.row].publicacion
-        //let dateFormatterGet = DateFormatter()
-        //dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm.sssZ"
-        
-        //let dateFormatterPrint = DateFormatter()
-        //dateFormatterPrint.dateFormat = "MMM dd,yyyy"
-        
-        //let date: Date? = dateFormatterGet.date(from: posts[indexPath.row].publicacion)
-        //celda.lblFecha?.text = dateFormatterPrint.string(from: date!)
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "MMM dd,yyyy"
+        //print(celda.lblFecha.text)
+        let date = dateFormatterGet.date(from: posts[indexPath.row].publicacion)
+        //print("Fecha \(date)")
+        celda.lblFecha?.text = dateFormatterPrint.string(from: date!)
+        celda.contentView.layer.cornerRadius = 10
+        celda.contentView.layer.masksToBounds = true
+        celda.Imagen?.layer.cornerRadius = 10
+        celda.Imagen?.layer.masksToBounds = true
         
         return celda
     }
