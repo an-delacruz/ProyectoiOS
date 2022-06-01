@@ -10,6 +10,13 @@ import UIKit
 
 class viewPerfilUsuario:UITableViewController{
     
+    //let usuario : self.Any?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.obtenerUsuario()
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -19,13 +26,25 @@ class viewPerfilUsuario:UITableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tableView.dequeueReusableCell(withIdentifier: "viewCeldaPerfil", for: indexPath) as! viewCeldaPerfil
-        
         return celda;
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 284
     }
+    
+    func obtenerUsuario(){
+        let defaults = UserDefaults.standard
+        let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")
+        let usuario = def?.usuario;
+        
+        
+        print("\(usuario)")
+    }
+    
+    
+    
+    
     
     
     

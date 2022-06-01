@@ -35,8 +35,9 @@ func getUsuarios(){
         }
     }.resume()
 }
-func getUsuario(usuario:String){
+func getUsuario(usuario:String,completion: @escaping (_ json: Any?, _ error: Any?)->()){
     let defaults = UserDefaults.standard
+    let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")
     let session = defaults.object(forKey: "auth") as? Auth
     let stringURL = baseURL + "/usuarios/\(usuario)"
     guard let url = URL(string: stringURL) else {return}
@@ -48,12 +49,27 @@ func getUsuario(usuario:String){
     URLSession.shared.dataTask(with:request){
         (data,response,error) in
         DispatchQueue.main.async {
-            guard let datos = data else {return}
-            let dataJSON = try? JSONSerialization.jsonObject(with: datos, options:[])
-            if let dataJSON = dataJSON as? [String:Any]{
-                if dataJSON["ok"] as! Bool{
-                    print("msg -> \(dataJSON["results"]!)")
+            do{
+                
+                let decoder = JSONDecoder();
+                guard let res = response as? HTTPURLResponse else {return}
+                print("res -› \(res)")
+                guard let datos = data else {return}
+                if  res.statusCode == 200 {
+                    //usuario = try decoder.decode(Perfil.self,from:datos).results
+                    completion(usuario,nil)
+                    return
+                    
+                } else  {
+                    let err = try decoder.decode(ErrorResponse.self, from: datos)
+                    print(err)
+                    completion(nil,err)
+                    return
                 }
+                
+            }
+            catch let jsonError{
+                print(jsonError)
             }
 
         }

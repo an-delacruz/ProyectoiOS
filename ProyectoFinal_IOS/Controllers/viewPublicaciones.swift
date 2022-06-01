@@ -72,7 +72,10 @@ class viewPublicaciones:UITableViewController{
         let vista = storyboard?.instantiateViewController(identifier: "viewPerfilUsuario") as? viewPerfilUsuario
         vista?.modalPresentationStyle = .fullScreen
 
-        self.navigationController?.present(vista!, animated: true, completion: nil)
+        
+        
+        
+        self.navigationController?.present(vista!, animated: true, completion: nil)        
     }
     
     
