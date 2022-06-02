@@ -17,5 +17,8 @@ class viewCeldaPublicacion:UITableViewCell{
     @IBOutlet weak var lblFecha: UILabel!
     @IBOutlet weak var lblDescripcion: UILabel!
     
-
+    @IBAction func pinchGesture(_ sender: UIPinchGestureRecognizer) {
+        Imagen.transform = CGAffineTransform(scaleX: sender.scale, y: sender.scale)
+    }
+    
 }
