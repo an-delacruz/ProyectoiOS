@@ -58,12 +58,6 @@ class viewLogin:UIViewController
             }
            
         }
-        
-        //getUsuarios()
-        //print(usuarios)
-        //postIniciarSesion(usuario: usuario, contrasena: contrasena
-
-
     }
    
     @IBAction func btnSign(_ sender: UIButton) {

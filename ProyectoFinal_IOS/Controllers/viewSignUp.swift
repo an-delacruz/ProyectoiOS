@@ -44,7 +44,6 @@ class viewSignUp:UIViewController{
     }
     
     func redirigirLogin(){
-        let vista = storyboard?.instantiateViewController(identifier: "viewLoginID") as? viewLogin
         self.dismiss(animated: true)
     }
     func Alerta(_ title: String,_ msg: String, completion: @escaping()-> ()) {
