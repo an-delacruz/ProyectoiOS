@@ -35,4 +35,17 @@ struct PostStruct:Codable{
     var status: Bool
     var descripcion: String
 }
+struct PublicacionResponse:Codable {
+    var ok:Bool
+    var results: [PostStruct]
+    
+    enum CodingKeys: String, CodingKey{
+        case ok = "ok"
+        case results = "results"
+    }
+}
+struct PublicacionPost: Codable{
+    var descripcion:String
+    var img: String
+}
 var posts = [PostStruct]()

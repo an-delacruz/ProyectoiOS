@@ -70,7 +70,6 @@ func getUsuario(_ usuario:String,completion: @escaping (_ json: Usuario?, _ erro
     guard let url = URL(string: stringURL) else {return}
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
-    //request.addValue(token, forHTTPHeaderField: "x-token")
     request.allHTTPHeaderFields = ["x-token": session!.token]
 
     URLSession.shared.dataTask(with:request){
@@ -205,32 +204,47 @@ struct CambiarContrasena:Encodable{
     var nueva:String
 }
 
-func putContrasena(_ usuario:CambiarContrasena, _ id:Int){
+func putContrasena(_ cambiarContrasena:CambiarContrasena, _ id:Int, completion: @escaping(_ json:Any?, _ error:ErrorResponse?)->()){
+    print(cambiarContrasena)
     let defaults = UserDefaults.standard
-    let session = defaults.object(forKey: "auth") as? Auth
+    let session = defaults.getCustomObject(dataType: Auth.self, key: "auth")
     let stringURL = baseURL + "/usuarios/contrasena/\(id)"
+    print(stringURL	)
     let enconder = JSONEncoder()
     enconder.outputFormatting = .prettyPrinted
-    let jsonData = try! enconder.encode(usuario)
+    let jsonData = try! enconder.encode(cambiarContrasena)
     guard let url = URL(string: stringURL) else {return}
     var request = URLRequest(url: url)
     request.httpMethod = "PUT"
     request.httpBody = jsonData
-    //request.addValue(token, forHTTPHeaderField: "x-token")
+    print(jsonData)
     request.allHTTPHeaderFields = ["x-token": session!.token]
-
-    print("body -> \(request.httpBody?.prettyPrintedJSONString!)")
+    request.allHTTPHeaderFields = [
+        "Content-Type": "application/json",
+        "Accept": "application/json"]
     URLSession.shared.dataTask(with:request){
         (data,response,error) in
         DispatchQueue.main.async {
-            guard let datos = data else {return}
-            let dataJSON = try? JSONSerialization.jsonObject(with: datos, options:[])
-            if let dataJSON = dataJSON as? [String:Any]{
-                if dataJSON["ok"] as! Bool{
-                    print("msg -> \(dataJSON["msg"]!)")
+            do{
+                let decoder = JSONDecoder();
+                guard let res = response as? HTTPURLResponse else {return}
+                guard let datos = data else {return}
+                if  res.statusCode == 200 {
+                    let cambioContrasena = try decoder.decode(BasicResponse.self,from:datos)
+                    completion(cambioContrasena,nil)
+                    return
+                    
+                } else  {
+                    let err = try decoder.decode(ErrorResponse.self, from: datos)
+                    print(err)
+                    completion(nil,err)
+                    return
                 }
+                
             }
-
+            catch let jsonError{
+                print(jsonError)
+            }
         }
     }.resume()
 }

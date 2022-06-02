@@ -10,19 +10,7 @@ import UIKit
 
 var baseURL = "https://ios-backend-tec.herokuapp.com"
 
-struct PublicacionResponse:Codable {
-    var ok:Bool
-    var results: [PostStruct]
-    
-    enum CodingKeys: String, CodingKey{
-        case ok = "ok"
-        case results = "results"
-    }
-}
-struct PublicacionPost: Codable{
-    var descripcion:String
-    var img: String
-}
+
 func getPublicaciones(completion: @escaping (_ json: Any?, _ error: Any?)->())
 {
     let defaults = UserDefaults.standard

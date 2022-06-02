@@ -124,6 +124,7 @@
 		55363E5D283F1C07006F78E7 /* ProyectoFinal_IOS */ = {
 			isa = PBXGroup;
 			children = (
+				B7FF4A3C284957C800181DDD /* Views */,
 				B731E9B6284535C500AE814E /* Controllers */,
 				B731E9B02845352D00AE814E /* Extensiones */,
 				04145D412843F6F000FFF531 /* Services */,
@@ -132,7 +133,6 @@
 				55363E60283F1C07006F78E7 /* SceneDelegate.swift */,
 				55363E62283F1C07006F78E7 /* ViewController.swift */,
 				55363E64283F1C07006F78E7 /* Main.storyboard */,
-				55CA993D2841EBDE00BAAE15 /* publicacionesXib.xib */,
 				55363E67283F1C09006F78E7 /* Assets.xcassets */,
 				55363E69283F1C09006F78E7 /* LaunchScreen.storyboard */,
 				55363E6C283F1C09006F78E7 /* Info.plist */,
@@ -167,6 +167,14 @@
 				2E6CCE53284884F4004E1472 /* viewSubirFoto.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B7FF4A3C284957C800181DDD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				55CA993D2841EBDE00BAAE15 /* publicacionesXib.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
