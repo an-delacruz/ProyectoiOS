@@ -7,6 +7,9 @@
 
 import Foundation
 import UIKit
+import AVFoundation
+import AudioToolbox
+
 
 class viewPublicaciones:UITableViewController{
     @IBOutlet weak var toolAgregar: UIBarButtonItem!
@@ -21,8 +24,13 @@ class viewPublicaciones:UITableViewController{
 
         self.navigationController?.present(vista!, animated: true, completion: nil)
     }
+    let defaults = UserDefaults.standard
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        if(defaults.bool(forKey: "sonido")){
+            AudioServicesPlaySystemSound(SystemSoundID(1000))
+        }
         getPublicaciones(){
             json, error in
             self.tableView.reloadData()

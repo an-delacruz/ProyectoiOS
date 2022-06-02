@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import AVFoundation
+import AudioToolbox
 
 class viewLogin:UIViewController
 {
@@ -21,10 +23,14 @@ class viewLogin:UIViewController
     override func viewDidLoad() {
         let defaults = UserDefaults.standard
         let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")
+        if(defaults.bool(forKey: "sonido")){
+            AudioServicesPlaySystemSound(SystemSoundID(1000))
+        }
         if(def?.token != nil){
             getRenovarToken(){
             json,error in
                 if error == nil {
+                    
                     self.redirigirSesionValida()
                 } else {
                     self.alertaSesionExpirada()
@@ -67,6 +73,7 @@ class viewLogin:UIViewController
     
     func redirigirSesionValida(){
            let vista = storyboard?.instantiateViewController(identifier: "publicacionesEditable") as? viewPublicaciones
+        
            vista?.modalPresentationStyle = .fullScreen
            self.navigationController?.present(vista!, animated: true, completion: nil)
        }
