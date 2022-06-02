@@ -616,6 +616,10 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p2b-gc-wm3">
                                             <rect key="frame" x="10" y="11" width="139" height="105"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <gestureRecognizers/>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="LaJ-lc-RWB" appends="YES" id="z6N-MN-f2w"/>
+                                            </connections>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zib-1M-wGk">
                                             <rect key="frame" x="10" y="139" width="384" height="21"/>
@@ -685,6 +689,12 @@
                     <navigationItem key="navigationItem" id="Iy0-3S-JvV"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8q-Yt-P5i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="CsU-rg-jjL" userLabel="Exit" sceneMemberID="exit"/>
+                <pinchGestureRecognizer id="LaJ-lc-RWB">
+                    <connections>
+                        <action selector="pinchGesture:" destination="CsU-rg-jjL" id="q3q-9d-oYg"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-609742.02898550732" y="-56709.375"/>
         </scene>
