@@ -30,15 +30,23 @@ class viewConfiguration:UIViewController{
         defaults.synchronize()
     }
     
-    @IBAction func btnSignUp(_ sender: UIButton) {
-       
-        defaults.removeObject(forKey: "auth")
-        self.view?.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    
+    @IBAction func btnSignOut(_ sender: UIButton) {
+        let alerta = UIAlertController(title: "Confirmación", message: "Confirmar cierre de sesión", preferredStyle: .alert);
+        let btnCancelar = UIAlertAction(title: "Cancelar", style: .cancel)
+        let btnAceptar = UIAlertAction(title: "Confirmar", style: .destructive){
+            _ in
+            self.defaults.removeObject(forKey: "auth")
+            self.view?.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        }
+        alerta.addAction(btnCancelar)
+        alerta.addAction(btnAceptar)
+        self.present(alerta, animated: true)
+
     }
     
     @IBAction func btnCambiarContrasena(_ sender: UIButton) {
         let alerta = UIAlertController(title: "Contrasena", message: "Cambiar contrasena", preferredStyle: .alert)
+        
         
         alerta.addTextField(){
             (textField) -> Void in

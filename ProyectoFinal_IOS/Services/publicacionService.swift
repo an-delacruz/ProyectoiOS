@@ -32,7 +32,7 @@ func getPublicaciones(completion: @escaping (_ json: Any?, _ error: Any?)->())
             do{
                 let decoder = JSONDecoder()
                 posts = try decoder.decode(PublicacionResponse.self,from:datos).results
-                print("post -> \(posts)")
+                //print("post -> \(posts)")
                 posts.reverse()
                 completion(posts, error)
             }
@@ -69,7 +69,6 @@ func postPublicacion(_ post:PublicacionPost, completion: @escaping(_ json:Any?,_
                 
                 let decoder = JSONDecoder();
                 guard let res = response as? HTTPURLResponse else {return}
-                print("res -› \(res)")
                 guard let datos = data else {return}
                 if  res.statusCode == 200 {
                     let body = try decoder.decode(BasicResponse.self, from: datos)

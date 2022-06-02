@@ -26,7 +26,7 @@ class viewUsuarios:UITableViewController{
         celda.lblNombre?.text = "\(usuarios[indexPath.row].nombre)  \(usuarios[indexPath.row].apellido)"
         celda.lblUsuario?.text = usuarios[indexPath.row].usuario
         celda.imgUsuario.cargarImagen(usuarios[indexPath.row].foto)
-        print(usuarios[indexPath.row].seguido)
+        //print(usuarios[indexPath.row].seguido)
         if usuarios[indexPath.row].seguido{
             celda.btnSeguir.isEnabled = false
         }

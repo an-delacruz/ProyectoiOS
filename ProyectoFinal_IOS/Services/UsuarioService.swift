@@ -7,17 +7,7 @@
 
 import Foundation
 
-struct UsuariosResponse:Codable {
-    var ok:Bool
-    var msg:String
-    var results: [UsuarioStruct]
-    
-    enum CodingKeys: String, CodingKey{
-        case ok = "ok"
-        case msg = "msg"
-        case results = "results"
-    }
-}
+
 func getUsuarios(completion:@escaping(_ json:Any?, _ error:ErrorResponse?)->()){
     let defaults = UserDefaults.standard
     let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")
@@ -52,17 +42,7 @@ func getUsuarios(completion:@escaping(_ json:Any?, _ error:ErrorResponse?)->()){
     }.resume()
 }
 
-struct UsuarioResponse : Codable{
-    var ok:Bool
-    var msg: String
-    var results: Usuario
-    
-    enum CodingKeys: String, CodingKey{
-        case ok = "ok"
-        case msg = "msg"
-        case results = "results"
-    }
-}
+
 func getUsuario(_ usuario:String,completion: @escaping (_ json: Usuario?, _ error: ErrorResponse?)->()){
     let defaults = UserDefaults.standard
     let session = defaults.getCustomObject(dataType: Auth.self, key: "auth")
@@ -79,7 +59,7 @@ func getUsuario(_ usuario:String,completion: @escaping (_ json: Usuario?, _ erro
                 
                 let decoder = JSONDecoder();
                 guard let res = response as? HTTPURLResponse else {return}
-                print("res -› \(res)")
+                //print("res -› \(res)")
                 guard let datos = data else {return}
                 if  res.statusCode == 200 {
                     let usuario = try decoder.decode(UsuarioResponse.self,from:datos).results
@@ -122,7 +102,7 @@ func postUsuario(_ usuario:PostUsuarioStruct,completion: @escaping(_ json: Any?,
                 
                 let decoder = JSONDecoder();
                 guard let res = response as? HTTPURLResponse else {return}
-                print("res -› \(res)")
+                //print("res -› \(res)")
                 guard let datos = data else {return}
                 if  res.statusCode == 200 {
                     let body = try decoder.decode(BasicResponse.self, from: datos)
@@ -144,72 +124,13 @@ func postUsuario(_ usuario:PostUsuarioStruct,completion: @escaping(_ json: Any?,
     }.resume()
 
 }
-func putUsuario(_ usuario:Usuario){
-    let defaults = UserDefaults.standard
-    let session = defaults.object(forKey: "auth") as? Auth
-    let stringURL = baseURL + "/usuarios/\(usuario.idUsuario)"
-    let enconder = JSONEncoder()
-    enconder.outputFormatting = .prettyPrinted
-    let jsonData = try! enconder.encode(usuario)
-    guard let url = URL(string: stringURL) else {return}
-    var request = URLRequest(url: url)
-    request.httpMethod = "PUT"
-    request.httpBody = jsonData
-    //request.addValue(token, forHTTPHeaderField: "x-token")
-    request.allHTTPHeaderFields = ["x-token": session!.token]
-
-    print("body -> \(request.httpBody?.prettyPrintedJSONString!)")
-    URLSession.shared.dataTask(with:request){
-        (data,response,error) in
-        DispatchQueue.main.async {
-            guard let datos = data else {return}
-            let dataJSON = try? JSONSerialization.jsonObject(with: datos, options:[])
-            if let dataJSON = dataJSON as? [String:Any]{
-                if dataJSON["ok"] as! Bool{
-                    print("msg -> \(dataJSON["msg"]!)")
-                }
-            }
-
-        }
-    }.resume()
-}
-
-func deleteUsuario(_ id:Int){
-    let defaults = UserDefaults.standard
-    let session = defaults.object(forKey: "auth") as? Auth
-    let stringURL = baseURL + "/usuarios/\(id)"
-    guard let url = URL(string: stringURL) else {return}
-    var request = URLRequest(url: url)
-    request.httpMethod = "DELETE"
-    //request.addValue(token, forHTTPHeaderField: "x-token")
-    request.allHTTPHeaderFields = ["x-token": session!.token]
-
-    URLSession.shared.dataTask(with:request){
-        (data,response,error) in
-        DispatchQueue.main.async {
-            guard let datos = data else {return}
-            let dataJSON = try? JSONSerialization.jsonObject(with: datos, options:[])
-            if let dataJSON = dataJSON as? [String:Any]{
-                if dataJSON["ok"] as! Bool{
-                    print("msg -> \(dataJSON["msg"]!)")
-                }
-            }
-
-        }
-    }.resume()
-}
-
-struct CambiarContrasena:Encodable{
-    var actual:String
-    var nueva:String
-}
 
 func putContrasena(_ cambiarContrasena:CambiarContrasena, _ id:Int, completion: @escaping(_ json:Any?, _ error:ErrorResponse?)->()){
-    print(cambiarContrasena)
+    //print(cambiarContrasena)
     let defaults = UserDefaults.standard
     let session = defaults.getCustomObject(dataType: Auth.self, key: "auth")
     let stringURL = baseURL + "/usuarios/contrasena/\(id)"
-    print(stringURL	)
+    //print(stringURL	)
     let enconder = JSONEncoder()
     enconder.outputFormatting = .prettyPrinted
     let jsonData = try! enconder.encode(cambiarContrasena)
@@ -217,7 +138,6 @@ func putContrasena(_ cambiarContrasena:CambiarContrasena, _ id:Int, completion: 
     var request = URLRequest(url: url)
     request.httpMethod = "PUT"
     request.httpBody = jsonData
-    print(jsonData)
     request.allHTTPHeaderFields = ["x-token": session!.token]
     request.allHTTPHeaderFields = [
         "Content-Type": "application/json",
@@ -249,38 +169,7 @@ func putContrasena(_ cambiarContrasena:CambiarContrasena, _ id:Int, completion: 
     }.resume()
 }
 
-func postFoto(_ img:String){
-    let defaults = UserDefaults.standard
-    let session = defaults.object(forKey: "auth") as? Auth
-    let stringURL = baseURL + "/usuarios/foto"
-    let enconder = JSONEncoder()
-    enconder.outputFormatting = .prettyPrinted
-    let jsonData = try! enconder.encode(img)
-    guard let url = URL(string: stringURL) else {return}
-    var request = URLRequest(url: url)
-    request.httpMethod = "POST"
-    request.httpBody = jsonData
-    //request.addValue(token, forHTTPHeaderField: "x-token")
-    request.allHTTPHeaderFields = ["x-token": session!.token]
 
-    URLSession.shared.dataTask(with:request){
-        (data,response,error) in
-        DispatchQueue.main.async {
-            guard let datos = data else {return}
-            let dataJSON = try? JSONSerialization.jsonObject(with: datos, options:[])
-            if let dataJSON = dataJSON as? [String:Any]{
-                if dataJSON["ok"] as! Bool{
-                    
-                }
-            }
-
-        }
-    }.resume()
-}
-
-struct SeguirUsuario:Codable{
-    let usuario:String
-}
 func postSeguirUsuario(_ usuario:SeguirUsuario, completion:@escaping(_ json: Any?, _ error:ErrorResponse?)->()){
     let defaults = UserDefaults.standard
     let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")
@@ -325,9 +214,7 @@ func postSeguirUsuario(_ usuario:SeguirUsuario, completion:@escaping(_ json: Any
     }.resume()
 }
 
-struct fotoUsuario:Codable {
-var img: String
-}
+
 func postSubirFoto(_ img:String,  completion:@escaping(_ json: Any?, _ error:ErrorResponse?)->()){
     let defaults = UserDefaults.standard
     let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")

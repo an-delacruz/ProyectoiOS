@@ -9,51 +9,15 @@
 import Foundation
 
 
-struct AuthResponse:Codable {
-    var ok:Bool
-    var msg: String
-    var results: Auth
-    
-    enum CodingKeys: String, CodingKey{
-        case ok = "ok"
-        case msg = "msg"
-        case results = "results"
-    }
-}
-struct IniciarSesion:Codable {
-    var usuario : String
-    var contrasena: String
-    
-    init(_ usr :String, _ contrasena: String){
-        self.usuario = usr
-        self.contrasena = contrasena
-    }
-}
-struct ErrorResponse:Codable {
-    var ok:Bool
-    var msg: String
-    
-    enum CodingKeys: String, CodingKey{
-        case ok = "ok"
-        case msg = "msg"
-    }
-}
-struct BasicResponse:Codable {
-    var ok:Bool
-    var msg: String
-    
-    enum CodingKeys: String, CodingKey{
-        case ok = "ok"
-        case msg = "msg"
-    }
-}
+
+
 func postIniciarSesion(usuario: String, contrasena: String, completion: @escaping(_ json: Any?, _ error: ErrorResponse?)-> ()) {
     let dict = ["usuario": usuario, "contrasena": contrasena]
     
     let jsonData = try! JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
     
     let stringURL = baseURL + "/usuarios/auth/"
-    print(stringURL)
+    //print(stringURL)
     guard let url = URL(string:stringURL) else {return}
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
@@ -74,7 +38,7 @@ func postIniciarSesion(usuario: String, contrasena: String, completion: @escapin
                 guard let datos = data else {return}
                 if  res.statusCode == 200 {
                     let auth = try decoder.decode(AuthResponse.self, from: datos).results
-                    print(auth)
+                    //print(auth)
                     let defaults = UserDefaults.standard
                     
                     defaults.setCustomObject(auth,forKey: "auth")
@@ -118,7 +82,7 @@ func getRenovarToken( completion: @escaping(_ json: Any?, _ error: ErrorResponse
                 guard let datos = data else {return}
                 if  res.statusCode == 200 {
                     let auth = try decoder.decode(AuthResponse.self, from: datos).results
-                    print(auth)
+                    //print(auth)
                     let defaults = UserDefaults.standard
                     
                     defaults.setCustomObject(auth,forKey: "auth")
