@@ -422,7 +422,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PtG-hw-9lr">
-                                <rect key="frame" x="30" y="244" width="129" height="31"/>
+                                <rect key="frame" x="20" y="244" width="148" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Cambiar imagen"/>
@@ -443,7 +443,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xW6-Lk-c0v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-608452" y="-56709"/>
+            <point key="canvasLocation" x="-608453.62318840588" y="-56709.375"/>
         </scene>
         <!--View Subir Foto-->
         <scene sceneID="Dgs-pb-bJD">

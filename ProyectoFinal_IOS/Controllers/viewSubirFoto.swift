@@ -26,14 +26,17 @@ class viewSubirFoto: UIViewController,UIImagePickerControllerDelegate, UINavigat
 
         if imgBase64 != nil {
            
-           /*postSubirFoto(imgBase64){
+           postSubirFoto(imgBase64!){
             json, error in
                if error != nil{
-                    self.Alerta("Error al crear el post", error!.msg){}
+                    self.Alerta("Error al subir la foto", error!.msg){}
                }else{
-                   self.dismiss(animated: true)
+                   self.Alerta("Info", "Foto subida correctamente"){
+                       self.dismiss(animated: true)
+                   }
+                   
                }
-            }*/
+            }
         }else{
             self.Alerta("Faltan campos", "Selecciona una imagen e ingresa la descripcion"){}
         }
