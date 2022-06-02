@@ -16,6 +16,7 @@ class viewConfiguration:UIViewController{
     let defaults = UserDefaults.standard
     
     
+    @IBOutlet weak var swDarkMode: UISwitch!
     
     override func viewDidLoad() {
         self.swSonido.isOn = defaults.bool(forKey: "sonido")
@@ -33,4 +34,6 @@ class viewConfiguration:UIViewController{
         self.view?.window?.rootViewController?.dismiss(animated: true, completion: nil)
     
     }
+    
+    
 }
