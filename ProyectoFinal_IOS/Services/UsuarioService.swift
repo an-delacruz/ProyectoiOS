@@ -35,10 +35,21 @@ func getUsuarios(){
         }
     }.resume()
 }
-func getUsuario(usuario:String,completion: @escaping (_ json: Any?, _ error: Any?)->()){
+
+struct UsuarioResponse : Codable{
+    var ok:Bool
+    var msg: String
+    var results: Usuario
+    
+    enum CodingKeys: String, CodingKey{
+        case ok = "ok"
+        case msg = "msg"
+        case results = "results"
+    }
+}
+func getUsuario(_ usuario:String,completion: @escaping (_ json: Usuario?, _ error: ErrorResponse?)->()){
     let defaults = UserDefaults.standard
-    let def = defaults.getCustomObject(dataType: Auth.self, key: "auth")
-    let session = defaults.object(forKey: "auth") as? Auth
+    let session = defaults.getCustomObject(dataType: Auth.self, key: "auth")
     let stringURL = baseURL + "/usuarios/\(usuario)"
     guard let url = URL(string: stringURL) else {return}
     var request = URLRequest(url: url)
@@ -56,7 +67,7 @@ func getUsuario(usuario:String,completion: @escaping (_ json: Any?, _ error: Any
                 print("res -› \(res)")
                 guard let datos = data else {return}
                 if  res.statusCode == 200 {
-                    //usuario = try decoder.decode(Perfil.self,from:datos).results
+                    let usuario = try decoder.decode(UsuarioResponse.self,from:datos).results
                     completion(usuario,nil)
                     return
                     

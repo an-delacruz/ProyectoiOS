@@ -20,7 +20,7 @@ var idUsuario: Int
         case idUsuario, nombre, apellido, usuario, status, foto
         case posts = "Posts"
         case seguidores = "Seguidores"
-        case seguidos
+        case seguidos = "Seguidos"
     }
 
     init(idUsuario: Int, nombre: String, apellido: String, usuario: String, status: Bool, foto: String, posts: [Post], seguidores: [Seguido], seguidos: [Seguido]) {
