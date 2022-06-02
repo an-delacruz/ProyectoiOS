@@ -11,6 +11,7 @@ import UIKit
 class viewPublicaciones:UITableViewController{
     @IBOutlet weak var toolAgregar: UIBarButtonItem!
     
+    @IBOutlet weak var toolBuscar: UIBarButtonItem!
     @IBOutlet weak var toolConfiguraciones: UIBarButtonItem!
     
     @IBAction func btnAgregarPost(_ sender: UIBarButtonItem) {
@@ -36,7 +37,6 @@ class viewPublicaciones:UITableViewController{
         return posts.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Posts Recargados -> \(posts)")
         let celda = Bundle.main.loadNibNamed("publicacionesXib", owner: self)?.first as! viewCeldaPublicacion
         //let celda = tableView.dequeueReusableCell(withIdentifier: "celdaPublicacion", for: indexPath) as! viewCeldaPublicacion
         celda.lblUsuario?.text = posts[indexPath.row].usuario
