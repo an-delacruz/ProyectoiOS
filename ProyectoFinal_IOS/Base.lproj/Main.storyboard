@@ -461,6 +461,9 @@
                                 <rect key="frame" x="63" y="456" width="288" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <buttonConfiguration key="configuration" style="filled" image="plus.circle" catalog="system" title="Subir imagen"/>
+                                <connections>
+                                    <action selector="btnSubirImagen:" destination="TsZ-kl-iN9" eventType="touchUpInside" id="vGo-1Y-W2a"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Selecciona una imagen" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41a-xq-Jey">
                                 <rect key="frame" x="63" y="92" width="108" height="55"/>
@@ -476,11 +479,17 @@
                                 <buttonConfiguration key="configuration" style="gray" image="photo" catalog="system" title="+">
                                     <fontDescription key="titleFontDescription" type="system" weight="light" pointSize="24"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="btnAgregarImagen:" destination="TsZ-kl-iN9" eventType="touchUpInside" id="fec-t2-wSj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aiC-0K-9Jg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="imgPublicacion" destination="mbn-ew-UgQ" id="Wn3-pY-WQH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Z8-Oo-x9N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
