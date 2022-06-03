@@ -102,7 +102,7 @@ class viewPerfilUsuario:UITableViewController{
             let nombre = alert!.textFields![0].text
             let apellido = alert!.textFields![1].text
             
-            if nombre == nil || apellido == nil {
+            if nombre?.count == 0 || apellido?.count == 0{
                 self.AlertaError("Faltan datos")
             }
             
@@ -117,8 +117,7 @@ class viewPerfilUsuario:UITableViewController{
                     self.AlertaError(error!.msg)
                 }
             }
-            
-            
+                    
         })
         let cancelar = UIAlertAction(title: "Cancelar", style: .destructive)
         alert.addAction(confirmar)
