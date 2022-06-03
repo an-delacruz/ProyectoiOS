@@ -51,10 +51,12 @@ class viewConfiguration:UIViewController{
         alerta.addTextField(){
             (textField) -> Void in
             textField.placeholder = "Contrasena actual"
+            textField.isSecureTextEntry = true
         }
         alerta.addTextField(){
             (textField) -> Void in
             textField.placeholder = "Contrasena nueva"
+            textField.isSecureTextEntry = true
         }
         
         let btnCancelar = UIAlertAction(title: "Cancelar", style: .cancel)
