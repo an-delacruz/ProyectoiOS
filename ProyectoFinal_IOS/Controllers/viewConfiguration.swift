@@ -60,22 +60,18 @@ class viewConfiguration:UIViewController{
         let btnCancelar = UIAlertAction(title: "Cancelar", style: .cancel)
         let btnAceptar = UIAlertAction(title: "Guardar", style: .default){
             _ in
-            self.obtenerUsuario(){
-                res,error in
-                let cambiarContrasena = CambiarContrasena(actual: alerta.textFields![0].text!, nueva: alerta.textFields![1].text!)
-                let id = self.usuario?.idUsuario
-                putContrasena(cambiarContrasena, id!){
-                    json, error in
-                    if error != nil {
-                        self.dismiss(animated: true)
+            let cambiarContrasena = CambiarContrasena(actual: alerta.textFields![0].text!, nueva: alerta.textFields![1].text!)
+            putContrasena(cambiarContrasena){
+                json, error in
+                //print(json,error)
+                if error != nil {
+                    
+                    self.AlertaError(error!.msg)
 
-                        self.AlertaError(error!.msg)
-                        return
-                    }else{
-                        self.AlertaConfirmacion((json as! BasicResponse).msg)
-                        self.dismiss(animated: true)
-                        return
-                    }
+                    return
+                }else{
+                    self.AlertaConfirmacion((json as! BasicResponse).msg)
+                    return
                 }
             }
         }
@@ -83,20 +79,6 @@ class viewConfiguration:UIViewController{
         alerta.addAction(btnAceptar)
         self.present(alerta, animated: true)
         
-    }
-    func obtenerUsuario(completion:@escaping(_ res: Any, _ error: Any)->()){
-        let user = defaults.getCustomObject(dataType: Auth.self, key: "auth")
-        getUsuario(user!.usuario){
-            json,error in
-            if error != nil {
-                self.AlertaError(error!.msg)
-                return
-            } else {
-                self.usuario = json;
-                
-            }
-            completion(json, error)
-        }
     }
     
     func AlertaError(_ msg: String) {

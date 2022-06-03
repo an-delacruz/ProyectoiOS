@@ -418,6 +418,9 @@
                                 <buttonConfiguration key="configuration" style="tinted" imagePlacement="trailing" title="Cambiar contrasena">
                                     <imageReference key="image" image="rectangle.and.pencil.and.ellipsis" catalog="system" symbolScale="large"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="btnCambiarContrasena:" destination="ed3-Yy-x59" eventType="touchUpInside" id="GU2-bg-FbQ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RCy-GJ-YOg">
                                 <rect key="frame" x="212" y="457" width="140" height="53"/>
@@ -719,7 +722,7 @@
     </scenes>
     <resources>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
-        <image name="logo instatec" width="1000" height="1000"/>
+        <image name="logo instatec" width="500" height="500"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="81"/>
         <image name="person" catalog="system" width="128" height="117"/>

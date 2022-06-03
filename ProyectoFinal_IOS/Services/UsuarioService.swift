@@ -125,11 +125,11 @@ func postUsuario(_ usuario:PostUsuarioStruct,completion: @escaping(_ json: Any?,
 
 }
 
-func putContrasena(_ cambiarContrasena:CambiarContrasena, _ id:Int, completion: @escaping(_ json:Any?, _ error:ErrorResponse?)->()){
+func putContrasena(_ cambiarContrasena:CambiarContrasena, completion: @escaping(_ json:Any?, _ error:ErrorResponse?)->()){
     //print(cambiarContrasena)
     let defaults = UserDefaults.standard
     let session = defaults.getCustomObject(dataType: Auth.self, key: "auth")
-    let stringURL = baseURL + "/usuarios/contrasena/\(id)"
+    let stringURL = baseURL + "/usuarios/contrasena/"
     //print(stringURL	)
     let enconder = JSONEncoder()
     enconder.outputFormatting = .prettyPrinted

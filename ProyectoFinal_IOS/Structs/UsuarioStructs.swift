@@ -28,7 +28,7 @@ struct UsuarioResponse : Codable{
         case results = "results"
     }
 }
-struct CambiarContrasena:Encodable{
+struct CambiarContrasena:Codable{
     var actual:String
     var nueva:String
 }
