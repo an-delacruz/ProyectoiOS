@@ -36,7 +36,7 @@ func getUsuarios(completion:@escaping(_ json:Any?, _ error:ErrorResponse?)->()){
                 print(jsonError)
             }
 
-            
+
 
         }
     }.resume()
@@ -56,7 +56,7 @@ func getUsuario(_ usuario:String,completion: @escaping (_ json: Usuario?, _ erro
         (data,response,error) in
         DispatchQueue.main.async {
             do{
-                
+
                 let decoder = JSONDecoder();
                 guard let res = response as? HTTPURLResponse else {return}
                 //print("res -› \(res)")
@@ -65,14 +65,14 @@ func getUsuario(_ usuario:String,completion: @escaping (_ json: Usuario?, _ erro
                     let usuario = try decoder.decode(UsuarioResponse.self,from:datos).results
                     completion(usuario,nil)
                     return
-                    
+
                 } else  {
                     let err = try decoder.decode(ErrorResponse.self, from: datos)
                     print(err)
                     completion(nil,err)
                     return
                 }
-                
+
             }
             catch let jsonError{
                 print(jsonError)
@@ -99,7 +99,7 @@ func postUsuario(_ usuario:PostUsuarioStruct,completion: @escaping(_ json: Any?,
         (data,response,error) in
         DispatchQueue.main.async {
             do{
-                
+
                 let decoder = JSONDecoder();
                 guard let res = response as? HTTPURLResponse else {return}
                 //print("res -› \(res)")
@@ -108,14 +108,14 @@ func postUsuario(_ usuario:PostUsuarioStruct,completion: @escaping(_ json: Any?,
                     let body = try decoder.decode(BasicResponse.self, from: datos)
                     completion(body,nil)
                     return
-                    
+
                 } else  {
                     let err = try decoder.decode(ErrorResponse.self, from: datos)
                     print(err)
                     completion(nil,err)
                     return
                 }
-                
+
             }
             catch let jsonError{
                 print(jsonError)
@@ -123,6 +123,52 @@ func postUsuario(_ usuario:PostUsuarioStruct,completion: @escaping(_ json: Any?,
         }
     }.resume()
 
+}
+
+func putUsuario(_ usuario:PutUsuarioStruct,completion: @escaping(_ json: Any?, _ error: ErrorResponse?)-> ()){
+    let defaults = UserDefaults.standard
+    let auth = defaults.getCustomObject(dataType: Auth.self, key: "auth")
+    let stringURL = baseURL + "/usuarios/\(auth!.usuario)"
+    let enconder = JSONEncoder()
+    enconder.outputFormatting = .prettyPrinted
+    let jsonData = try! enconder.encode(usuario)
+    guard let url = URL(string: stringURL) else {return}
+    var request = URLRequest(url: url)
+    request.httpMethod = "PUT"
+    request.allHTTPHeaderFields = [
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "x-token": auth?.token ?? ""
+    ]
+    request.httpBody = jsonData
+
+    URLSession.shared.dataTask(with:request){
+        (data,response,error) in
+        DispatchQueue.main.async {
+            do{
+
+                let decoder = JSONDecoder();
+                guard let res = response as? HTTPURLResponse else {return}
+                //print("res -› \(res)")
+                guard let datos = data else {return}
+                if  res.statusCode == 200 {
+                    let body = try decoder.decode(BasicResponse.self, from: datos)
+                    completion(body,nil)
+                    return
+
+                } else  {
+                    let err = try decoder.decode(ErrorResponse.self, from: datos)
+                    print(err)
+                    completion(nil,err)
+                    return
+                }
+
+            }
+            catch let jsonError{
+                print(jsonError)
+            }
+        }
+    }.resume()
 }
 
 func putContrasena(_ cambiarContrasena:CambiarContrasena, completion: @escaping(_ json:Any?, _ error:ErrorResponse?)->()){
@@ -153,14 +199,14 @@ func putContrasena(_ cambiarContrasena:CambiarContrasena, completion: @escaping(
                     let cambioContrasena = try decoder.decode(BasicResponse.self,from:datos)
                     completion(cambioContrasena,nil)
                     return
-                    
+
                 } else  {
                     let err = try decoder.decode(ErrorResponse.self, from: datos)
                     print(err)
                     completion(nil,err)
                     return
                 }
-                
+
             }
             catch let jsonError{
                 print(jsonError)
@@ -186,12 +232,12 @@ func postSeguirUsuario(_ usuario:SeguirUsuario, completion:@escaping(_ json: Any
     ]
     request.allHTTPHeaderFields = ["x-token": def!.token]
     request.httpBody = jsonData
-    
+
     URLSession.shared.dataTask(with:request){
         (data,response,error) in
         DispatchQueue.main.async {
             do{
-                
+
                 let decoder = JSONDecoder();
                 guard let res = response as? HTTPURLResponse else {return}
                 guard let datos = data else {return}
@@ -199,13 +245,13 @@ func postSeguirUsuario(_ usuario:SeguirUsuario, completion:@escaping(_ json: Any
                     let body = try decoder.decode(BasicResponse.self, from: datos)
                     completion(body,nil)
                     return
-                    
+
                 } else  {
                     let err = try decoder.decode(ErrorResponse.self, from: datos)
                     completion(nil,err)
                     return
                 }
-                
+
             }
             catch let jsonError{
                 print(jsonError)
@@ -232,12 +278,12 @@ func postSubirFoto(_ img:String,  completion:@escaping(_ json: Any?, _ error:Err
     ]
     request.allHTTPHeaderFields = ["x-token": def!.token]
     request.httpBody = jsonData
-    
+
     URLSession.shared.dataTask(with:request){
         (data,response,error) in
         DispatchQueue.main.async {
             do{
-                
+
                 let decoder = JSONDecoder();
                 guard let res = response as? HTTPURLResponse else {return}
                 guard let datos = data else {return}
@@ -245,13 +291,13 @@ func postSubirFoto(_ img:String,  completion:@escaping(_ json: Any?, _ error:Err
                     let body = try decoder.decode(BasicResponse.self, from: datos)
                     completion(body,nil)
                     return
-                    
+
                 } else  {
                     let err = try decoder.decode(ErrorResponse.self, from: datos)
                     completion(nil,err)
                     return
                 }
-                
+
             }
             catch let jsonError{
                 print(jsonError)

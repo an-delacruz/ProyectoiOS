@@ -10,7 +10,7 @@ struct UsuariosResponse:Codable {
     var ok:Bool
     var msg:String
     var results: [UsuarioStruct]
-    
+
     enum CodingKeys: String, CodingKey{
         case ok = "ok"
         case msg = "msg"
@@ -21,14 +21,18 @@ struct UsuarioResponse : Codable{
     var ok:Bool
     var msg: String
     var results: Usuario
-    
+
     enum CodingKeys: String, CodingKey{
         case ok = "ok"
         case msg = "msg"
         case results = "results"
     }
 }
-struct CambiarContrasena:Codable{
+struct PutUsuarioStruct: Codable {
+    var nombre, apellido: String
+}
+
+struct CambiarContrasena:Encodable{
     var actual:String
     var nueva:String
 }
