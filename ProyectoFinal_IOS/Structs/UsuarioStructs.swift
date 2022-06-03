@@ -28,6 +28,10 @@ struct UsuarioResponse : Codable{
         case results = "results"
     }
 }
+struct PutUsuarioStruct: Codable {
+    var nombre, apellido: String
+}
+
 struct CambiarContrasena:Encodable{
     var actual:String
     var nueva:String

@@ -643,6 +643,9 @@
                                                     </fragment>
                                                 </attributedString>
                                             </buttonConfiguration>
+                                            <connections>
+                                                <action selector="btnEditar:" destination="TK1-ep-1MW" eventType="touchUpInside" id="SVa-Ok-BhQ"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iAB-zR-8qB">
                                             <rect key="frame" x="357" y="12" width="50" height="39"/>

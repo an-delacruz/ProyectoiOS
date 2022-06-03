@@ -28,6 +28,7 @@ class viewPerfilUsuario:UITableViewController{
         return section == 0 ? 1 : usuario?.posts.count ?? 0
     }
     
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //print(indexPath.section)
         
@@ -86,6 +87,45 @@ class viewPerfilUsuario:UITableViewController{
             
         }
     }
+    @IBAction func btnEditar(_ sender: UIButton) {
+        let alert = UIAlertController(title:"Editar perfil" , message:"Edita los campos para continuar", preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Nombre"
+        }
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Apellido"
+        }
+        let confirmar = UIAlertAction(title: "Confirmar", style: .default,handler:{
+            [weak alert] _ in
+            let nombre = alert!.textFields![0].text
+            let apellido = alert!.textFields![1].text
+            
+            if nombre == nil || apellido == nil {
+                self.AlertaError("Faltan datos")
+            }
+            
+            let user = PutUsuarioStruct(nombre: nombre!, apellido: apellido!)
+            
+            putUsuario(user){
+                json, error in
+                if error == nil {
+                    self.AlertaConfirmacion("Los datos se actualizaron con exito")
+                    self.obtenerUsuario()
+                }else {
+                    self.AlertaError(error!.msg)
+                }
+            }
+            
+            
+        })
+        let cancelar = UIAlertAction(title: "Cancelar", style: .destructive)
+        alert.addAction(confirmar)
+        alert.addAction(cancelar)
+        self.present(alert, animated: true, completion: nil)
+        
+    }
     
     func AlertaError(_ msg: String) {
         let dialogMessage = UIAlertController(title: "Error al cargar el perfil del usuario", message: msg, preferredStyle: .alert)
@@ -94,7 +134,12 @@ class viewPerfilUsuario:UITableViewController{
         self.present(dialogMessage, animated: true, completion: nil)
     }
     
-    
+    func AlertaConfirmacion(_ msg:String){
+        let dialog = UIAlertController(title:"Usuario Actualizado", message: msg, preferredStyle: .alert)
+        let cerrar = UIAlertAction(title: "Cerrar", style: .default)
+        dialog.addAction(cerrar)
+        self.present(dialog, animated: true, completion: nil)
+    }
     
     
     
