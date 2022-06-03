@@ -1,17 +1,42 @@
 {
   "images" : [
     {
-      "filename" : "logo instatec.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "logo instatec-3.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "logo instatec-2.png",
       "idiom" : "universal",
       "scale" : "3x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "logo instatec-4.png",
+      "idiom" : "iphone",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "logo instatec-5.png",
+      "idiom" : "iphone",
+      "scale" : "3x"
+    },
+    {
+      "filename" : "logo instatec-6.png",
+      "idiom" : "ipad",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "logo instatec-7.png",
+      "idiom" : "ipad",
+      "scale" : "2x"
     }
   ],
   "info" : {
