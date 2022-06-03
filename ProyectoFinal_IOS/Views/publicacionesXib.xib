@@ -22,6 +22,7 @@
                         <gestureRecognizers/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="fZy-9L-bmv" appends="YES" id="NLS-Rf-6uX"/>
+                            <outletCollection property="gestureRecognizers" destination="yT8-fo-Qqf" appends="YES" id="GG7-kc-Fbm"/>
                         </connections>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Usuario" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ay-fH-1U0">
@@ -82,6 +83,11 @@
                 <action selector="pinchGesture:" destination="zwE-UN-j5J" id="qPf-PZ-Hjw"/>
             </connections>
         </pinchGestureRecognizer>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="yT8-fo-Qqf">
+            <connections>
+                <action selector="panGesture:" destination="zwE-UN-j5J" id="73c-WV-9S0"/>
+            </connections>
+        </panGestureRecognizer>
     </objects>
     <resources>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>

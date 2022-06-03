@@ -60,8 +60,6 @@ class viewPublicaciones:UITableViewController{
         celda.lblFecha?.text = dateFormatterPrint.string(from: date!)
         celda.contentView.layer.cornerRadius = 10
         celda.contentView.layer.masksToBounds = true
-        celda.Imagen?.layer.cornerRadius = 10
-        celda.Imagen?.layer.masksToBounds = true
         
         return celda
     }
