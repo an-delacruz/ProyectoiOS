@@ -32,7 +32,7 @@ struct PutUsuarioStruct: Codable {
     var nombre, apellido: String
 }
 
-struct CambiarContrasena:Encodable{
+struct CambiarContrasena:Codable{
     var actual:String
     var nueva:String
 }
